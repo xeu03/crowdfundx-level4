@@ -1,5 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
 import { WalletButton } from './WalletButton';
+import { NetworkBadge } from './NetworkBadge';
 import type { WalletState } from '../hooks/useWallet';
 
 export function Header({ wallet }: { wallet: WalletState }) {
@@ -26,7 +27,14 @@ export function Header({ wallet }: { wallet: WalletState }) {
           >
             Start a campaign
           </NavLink>
+          <NavLink
+            to="/leaderboard"
+            className={({ isActive }) => `header__link ${isActive ? 'header__link--active' : ''}`}
+          >
+            Leaderboard
+          </NavLink>
         </nav>
+        <NetworkBadge />
         <WalletButton wallet={wallet} />
       </div>
     </header>
