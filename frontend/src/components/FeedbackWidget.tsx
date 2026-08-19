@@ -4,7 +4,8 @@ import { track } from '../lib/monitoring';
 import { fetchWithTimeout } from '../lib/rpc';
 
 /** Read per-submit so tests can stub it with vi.stubEnv. */
-const feedbackApi = () => (import.meta.env.VITE_FEEDBACK_API as string | undefined) ?? '';
+const feedbackApi = () =>
+  ((import.meta.env.VITE_FEEDBACK_API as string | undefined) ?? '').replace(/\/+$/, '');
 
 interface FeedbackWidgetProps {
   walletAddress: string | null;
