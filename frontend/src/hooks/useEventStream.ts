@@ -69,15 +69,15 @@ export function useEventStream({
         : { type: 'contract', contractIds },
     ];
 
-    // Derive the first startLedger from the RPC retention window instead of
-    // hardcoding 1 — events older than the window are pruned and the RPC
-    // rejects out-of-range startLedger values with an error.
+    // Empirically measured on testnet: the RPC silently drops matches that
+    // are more than ~10 000 ledgers (~14h) ahead of startLedger. Start from
+    // a 9 000-ledger backscan so recent history loads, then cursor
+    // pagination keeps everything after it live. (Events older than the
+    // backscan are outside the RPC's effective scan window and are dropped.)
+    const BACKSCAN_LEDGERS = 9_000;
     const firstStartLedger = async (): Promise<number> => {
-      const [health, latest] = await Promise.all([
-        server.getHealth(),
-        server.getLatestLedger(),
-      ]);
-      return Math.max(1, latest.sequence - health.ledgerRetentionWindow + 10);
+      const latest = await server.getLatestLedger();
+      return Math.max(1, latest.sequence - BACKSCAN_LEDGERS);
     };
 
     const poll = async () => {

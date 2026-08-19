@@ -8,13 +8,11 @@ vi.mock('../lib/rpc', () => ({
   server: {
     getEvents: vi.fn(),
     getLatestLedger: vi.fn(),
-    getHealth: vi.fn(),
   },
 }));
 
 const mockGetEvents = vi.mocked(server.getEvents);
 const mockGetLatestLedger = vi.mocked(server.getLatestLedger);
-const mockGetHealth = vi.mocked(server.getHealth);
 
 const rawEvent = (id: string): rpc.Api.EventResponse => ({
   id,
@@ -52,7 +50,6 @@ describe('useEventStream', () => {
     vi.useFakeTimers();
     mockGetEvents.mockReset();
     mockGetLatestLedger.mockReset().mockResolvedValue({ sequence: 1000 } as never);
-    mockGetHealth.mockReset().mockResolvedValue({ ledgerRetentionWindow: 1000 } as never);
   });
 
   afterEach(() => {
@@ -90,10 +87,10 @@ describe('useEventStream', () => {
       2,
       expect.objectContaining({ cursor: 'cursor-1' }),
     );
-    // The first poll derived its startLedger from the retention window.
+    // The first poll derived its startLedger from the backscan window.
     expect(mockGetEvents).toHaveBeenNthCalledWith(
       1,
-      expect.objectContaining({ startLedger: 10 }),
+      expect.objectContaining({ startLedger: 1 }),
     );
 
     unmount();

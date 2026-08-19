@@ -42,15 +42,16 @@ export function Leaderboard() {
     }
   }, []);
 
+  // NOTE: no topic filters — the testnet RPC rejects string topics in
+  // getEvents. All events for these contracts are streamed and filtered by
+  // event name client-side (see onEvent).
   useEventStream({
     contractIds: isConfigured && campaignIds.length > 0 ? campaignIds : [],
-    topics: ['campaign', 'contributed'],
     onEvent,
     enabled: isConfigured && campaignIds.length > 0,
   });
   useEventStream({
     contractIds: isConfigured ? [FACTORY_ADDRESS] : [],
-    topics: ['factory', 'campaign_created'],
     onEvent,
     enabled: isConfigured,
   });
