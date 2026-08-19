@@ -1,9 +1,10 @@
 # CrowdfundX — Decentralized Crowdfunding on Stellar Soroban
 
-> **Level 3 — Orange Belt Submission**
+> **Level 4 — Green Belt Submission** (built on the Level 3 Orange Belt base)
 > A production-ready, end-to-end Stellar dApp: three Soroban smart contracts with
 > inter-contract communication, live event streaming, a React frontend,
-> full test suites, and CI/CD pipelines.
+> full test suites, CI/CD pipelines — plus user onboarding, on-chain
+> leaderboards, feedback collection, analytics and error monitoring.
 
 <!-- ═══════════════════ Submission checklist ═══════════════════ -->
 
@@ -13,6 +14,20 @@
 | Live demo (Vercel/Netlify) | https://aquamarine-semolina-ff4c7e.netlify.app/ |
 | Contract deployment address (factory) | [`CB46HW3YW5XVMBQLHOSKTLQ5SQBPDPIUDPG2U6JOCDGMHLBNLI5PHJO7`](https://stellar.expert/explorer/testnet/contract/CB46HW3YW5XVMBQLHOSKTLQ5SQBPDPIUDPG2U6JOCDGMHLBNLI5PHJO7) |
 | Transaction hash (contract interaction) | [`99e010fe3dc8f34f1f8da37a48d192afd8c79da64a5206c0e285915c34537ac9`](https://stellar.expert/explorer/testnet/tx/99e010fe3dc8f34f1f8da37a48d192afd8c79da64a5206c0e285915c34537ac9) (contribution hitting the goal) |
+| Proof of 10+ user wallet interactions | [Leaderboard](https://aquamarine-semolina-ff4c7e.netlify.app/#/leaderboard) — *fill counts once onboarding completes* |
+| User feedback summary | *— fill after onboarding (backend `/` page) —* |
+| Demo video (1–2 min) | *— to be filled —* |
+
+## Level 4 additions (on top of the Level 3 base)
+
+| Requirement | Where |
+| --- | --- |
+| User onboarding (10+ users, proof of wallet interactions) | On-chain [Leaderboard](#leaderboard) aggregates every real wallet's activity from contract events; [`docs/ONBOARDING.md`](docs/ONBOARDING.md) runbook; `scripts/faucet.sh` funds new users |
+| User feedback collection | In-app Feedback widget → [`backend/`](backend) API (Express + SQLite, rate-limited) with public summary page |
+| Monitoring & analytics | Sentry error tracking + PostHog analytics (env-gated, `src/lib/monitoring.ts`), RPC health badge, backend `/api/health` |
+| Performance optimization | Route-level code splitting (entry bundle ~7 kB gzip) + vendor chunk splitting |
+| Production deployment | Frontend on Netlify, backend deployable to Render/Railway, contracts on testnet |
+| Demo preparation | [`docs/DEMO.md`](docs/DEMO.md) recording script |
 
 ## Screenshots
 
@@ -63,10 +78,19 @@ contracts/            Soroban smart contracts (Rust, workspace)
   campaign/           All-or-nothing campaign (milestones, refunds, vault)
   factory/            Platform factory (inter-contract deploy, stats, fee)
 frontend/             React 19 + TypeScript + Vite dApp
+backend/              Feedback API (Express + SQLite) + health endpoint
 scripts/deploy.sh     One-command testnet/mainnet deployment + demo
+scripts/faucet.sh     Mint CFX to onboard new users
 .github/workflows/    CI (tests+build) and CD (deploy contracts + Netlify)
-docs/                 Architecture & deployment deep dives
+docs/                 Architecture, deployment, onboarding, demo script
 ```
+
+## Leaderboard
+
+`/#/leaderboard` aggregates every `contributed` and `campaign_created` event
+straight from the testnet contracts and ranks wallets by their verified
+on-chain activity — the proof-of-users page for Level 4. No database is
+involved: the ledger itself is the source of truth.
 
 See [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) for contract-level details and
 [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) for the full deployment runbook.
