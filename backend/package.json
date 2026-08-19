@@ -1,0 +1,22 @@
+{
+  "name": "crowdfundx-backend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "CrowdfundX feedback & monitoring API",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "DB_PATH=./data/test-feedback.db vitest run"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "vitest": "^4.1.10"
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  }
+}
