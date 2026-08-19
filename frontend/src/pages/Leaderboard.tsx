@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ErrorState } from '../components/ErrorState';
 import { Skeleton } from '../components/Skeleton';
 import { useEventStream } from '../hooks/useEventStream';
+import { useToast } from '../hooks/useToast';
 import { fetchCampaigns } from '../lib/contracts';
 import { aggregateActivity } from '../lib/leaderboard';
 import { formatCFX, shortAddress } from '../lib/format';
@@ -15,10 +16,20 @@ import type { DecodedEvent } from '../lib/types';
  * data source.
  */
 export function Leaderboard() {
+  const { push } = useToast();
   const [events, setEvents] = useState<DecodedEvent[]>([]);
   const [campaignIds, setCampaignIds] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const copyAddress = async (address: string) => {
+    try {
+      await navigator.clipboard.writeText(address);
+      push('success', 'Full address copied');
+    } catch {
+      push('error', 'Could not copy — clipboard unavailable');
+    }
+  };
 
   useEffect(() => {
     if (!isConfigured) {
@@ -116,9 +127,14 @@ export function Leaderboard() {
                 <tr key={row.address} data-testid="leaderboard-row">
                   <td>{index + 1}</td>
                   <td>
-                    <span className="leaderboard-address" title={row.address}>
+                    <button
+                      type="button"
+                      className="leaderboard-address"
+                      title={`${row.address} — click to copy`}
+                      onClick={() => void copyAddress(row.address)}
+                    >
                       {shortAddress(row.address)}
-                    </span>
+                    </button>
                   </td>
                   <td>{row.contributions}</td>
                   <td>{formatCFX(row.total)} CFX</td>

@@ -1014,4 +1014,15 @@ p {
 .leaderboard-address {
   font-family: monospace;
   font-size: 0.9rem;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--text);
+  cursor: pointer;
+  text-decoration: underline dotted var(--text-faint);
+  text-underline-offset: 3px;
+}
+
+.leaderboard-address:hover {
+  color: var(--primary-hover);
 }
