@@ -14,7 +14,7 @@
 | Live demo (Vercel/Netlify) | https://aquamarine-semolina-ff4c7e.netlify.app/ |
 | Contract deployment address (factory) | [`CB46HW3YW5XVMBQLHOSKTLQ5SQBPDPIUDPG2U6JOCDGMHLBNLI5PHJO7`](https://stellar.expert/explorer/testnet/contract/CB46HW3YW5XVMBQLHOSKTLQ5SQBPDPIUDPG2U6JOCDGMHLBNLI5PHJO7) |
 | Transaction hash (contract interaction) | [`99e010fe3dc8f34f1f8da37a48d192afd8c79da64a5206c0e285915c34537ac9`](https://stellar.expert/explorer/testnet/tx/99e010fe3dc8f34f1f8da37a48d192afd8c79da64a5206c0e285915c34537ac9) (contribution hitting the goal) |
-| Proof of 10+ user wallet interactions | [Leaderboard](https://aquamarine-semolina-ff4c7e.netlify.app/#/leaderboard) — *fill counts once onboarding completes* |
+| Proof of 10+ user wallet interactions | [Leaderboard](https://aquamarine-semolina-ff4c7e.netlify.app/#/leaderboard) — 11 wallets ranked from 21 on-chain contribution events |
 | User feedback summary | *— fill after onboarding (backend `/` page) —* |
 | Demo video (1–2 min) | *— to be filled —* |
 
