@@ -27,3 +27,6 @@ deployment.json
 
 # Soroban test snapshot artifacts
 test_snapshots/
+
+# Backend runtime data
+backend/data/

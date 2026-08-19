@@ -8,6 +8,7 @@ import { StatusBadge } from '../components/StatusBadge';
 import { useCampaign } from '../hooks/useCampaign';
 import { useEventStream } from '../hooks/useEventStream';
 import { useToast } from '../hooks/useToast';
+import { track } from '../lib/monitoring';
 import {
   closeFailedTx,
   contributeTx,
@@ -56,6 +57,10 @@ export function CampaignDetail({ walletAddress }: DetailProps) {
     try {
       const { hash } = await fn();
       push('success', `Transaction confirmed — ${hash.slice(0, 10)}…`);
+      void track(action.startsWith('milestone') ? 'milestone_released' : action, {
+        campaign: id,
+        tx: hash,
+      });
       reload();
     } catch (err) {
       push('error', err instanceof Error ? err.message : 'Transaction failed');

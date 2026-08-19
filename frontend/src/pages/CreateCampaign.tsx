@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '../hooks/useToast';
+import { track } from '../lib/monitoring';
 import { createCampaignTx } from '../lib/contracts';
 import { formatCFX, parseCFX } from '../lib/format';
 import { isConfigured } from '../config';
@@ -104,6 +105,7 @@ export function CreateCampaign({ walletAddress }: CreateProps) {
         milestones: values.milestonesRaw,
       });
       push('success', `Campaign deployed — ${hash.slice(0, 10)}…`);
+      void track('campaign_created', { goal: values.goalRaw.toString(), tx: hash });
       navigate('/');
     } catch (err) {
       push('error', err instanceof Error ? err.message : 'Deployment failed');
