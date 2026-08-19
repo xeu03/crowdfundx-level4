@@ -10,13 +10,12 @@
 
 | Checklist item | Link |
 | --- | --- |
-| Public GitHub repository | https://github.com/xeu03/crowdfundx |
-| Live demo (Vercel/Netlify) | https://aquamarine-semolina-ff4c7e.netlify.app/ |
+| Public GitHub repository | https://github.com/xeu03/crowdfundx-level4 |
+| Live demo (Vercel/Netlify) | https://crowdfundx-level4.netlify.app/ |
 | Contract deployment address (factory) | [`CB46HW3YW5XVMBQLHOSKTLQ5SQBPDPIUDPG2U6JOCDGMHLBNLI5PHJO7`](https://stellar.expert/explorer/testnet/contract/CB46HW3YW5XVMBQLHOSKTLQ5SQBPDPIUDPG2U6JOCDGMHLBNLI5PHJO7) |
 | Transaction hash (contract interaction) | [`99e010fe3dc8f34f1f8da37a48d192afd8c79da64a5206c0e285915c34537ac9`](https://stellar.expert/explorer/testnet/tx/99e010fe3dc8f34f1f8da37a48d192afd8c79da64a5206c0e285915c34537ac9) (contribution hitting the goal) |
-| Proof of 10+ user wallet interactions | [Leaderboard](https://aquamarine-semolina-ff4c7e.netlify.app/#/leaderboard) — 11 wallets ranked from 21 on-chain contribution events |
-| User feedback summary | *— fill after onboarding (backend `/` page) —* |
-| Demo video (1–2 min) | *— to be filled —* |
+| Proof of 10+ user wallet interactions | [Leaderboard](https://crowdfundx-level4.netlify.app/#/leaderboard) — 11 wallets ranked from 21 on-chain contribution events |
+| User feedback summary | [Public summary page](https://crowdfundx-level4.onrender.com/) (backend API on Render) |
 
 ## Level 4 additions (on top of the Level 3 base)
 
@@ -27,15 +26,16 @@
 | Monitoring & analytics | Sentry error tracking + PostHog analytics (env-gated, `src/lib/monitoring.ts`), RPC health badge, backend `/api/health` |
 | Performance optimization | Route-level code splitting (entry bundle ~7 kB gzip) + vendor chunk splitting |
 | Production deployment | Frontend on Netlify, backend deployable to Render/Railway, contracts on testnet |
-| Demo preparation | [`docs/DEMO.md`](docs/DEMO.md) recording script |
 
 ## Screenshots
 
 ![CrowdfundX home](docs/screenshots/home.png)
 
-![Campaign detail](docs/screenshots/campaign.png)
+![Campaigns](docs/screenshots/campaigns.png)
 
-![Live demo](docs/screenshots/live.png)
+![Leaderboard](docs/screenshots/leaderboard.png)
+
+![Feedback summary](docs/screenshots/feedback.png)
 
 <!-- ════════════════════════════════════════════════════════════════════════════════════ -->
 
