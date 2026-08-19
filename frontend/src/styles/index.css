@@ -888,3 +888,130 @@ p {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Network badge
+   -------------------------------------------------------------------------- */
+
+.network-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  padding: 0.25rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+
+.network-badge__dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--text-faint);
+}
+
+.network-badge--online .network-badge__dot {
+  background: var(--success);
+}
+
+.network-badge--offline .network-badge__dot {
+  background: var(--danger);
+}
+
+/* --------------------------------------------------------------------------
+   Feedback widget
+   -------------------------------------------------------------------------- */
+
+.feedback-widget {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.6rem;
+}
+
+.feedback-fab {
+  box-shadow: 0 6px 20px rgba(91, 140, 255, 0.35);
+}
+
+.feedback-panel {
+  width: min(20rem, calc(100vw - 2rem));
+}
+
+.feedback-stars {
+  display: flex;
+  gap: 0.2rem;
+  margin: 0.5rem 0;
+}
+
+.feedback-star {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-faint);
+  cursor: pointer;
+  padding: 0 0.15rem;
+}
+
+.feedback-star--on {
+  color: var(--warning);
+}
+
+.feedback-comment {
+  resize: vertical;
+}
+
+.feedback-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   Leaderboard
+   -------------------------------------------------------------------------- */
+
+.leaderboard-page {
+  padding-top: 1.5rem;
+  padding-bottom: 3rem;
+}
+
+.leaderboard-stats {
+  justify-content: flex-start;
+}
+
+.leaderboard-table-wrap {
+  overflow-x: auto;
+  padding: 0.5rem 1rem 1rem;
+}
+
+.leaderboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.leaderboard-table th {
+  text-align: left;
+  color: var(--text-faint);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.leaderboard-table td {
+  padding: 0.7rem 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.leaderboard-address {
+  font-family: monospace;
+  font-size: 0.9rem;
+}
