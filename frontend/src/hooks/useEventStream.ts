@@ -69,11 +69,22 @@ export function useEventStream({
         : { type: 'contract', contractIds },
     ];
 
+    // Derive the first startLedger from the RPC retention window instead of
+    // hardcoding 1 — events older than the window are pruned and the RPC
+    // rejects out-of-range startLedger values with an error.
+    const firstStartLedger = async (): Promise<number> => {
+      const [health, latest] = await Promise.all([
+        server.getHealth(),
+        server.getLatestLedger(),
+      ]);
+      return Math.max(1, latest.sequence - health.ledgerRetentionWindow + 10);
+    };
+
     const poll = async () => {
       try {
         const request = cursor
           ? { filters, cursor, limit: 100 }
-          : { filters, startLedger: 1, limit: 100 };
+          : { filters, startLedger: await firstStartLedger(), limit: 100 };
         const res = await server.getEvents(request as rpc.Api.GetEventsRequest);
         if (cancelled) return;
         cursor = res.cursor;
